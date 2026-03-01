@@ -1,0 +1,106 @@
+cat > cia_terminal.py << 'EOF'
+import os
+import time
+import sys
+import random
+
+GREEN = "\033[92m"
+RED = "\033[91m"
+CYAN = "\033[96m"
+RESET = "\033[0m"
+BOLD = "\033[1m"
+
+def clear():
+    os.system("clear")
+
+def slow(text, speed=0.015):
+    for c in text:
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(speed)
+    print()
+
+def badge():
+    print(CYAN + BOLD)
+    print("        ██████╗ ██╗ █████╗ ")
+    print("       ██╔════╝ ██║██╔══██╗")
+    print("       ██║      ██║███████║")
+    print("       ██║      ██║██╔══██║")
+    print("       ╚██████╗ ██║██║  ██║")
+    print("        ╚═════╝ ╚═╝╚═╝  ╚═╝")
+    print("   CENTRAL INTELLIGENCE AGENCY")
+    print(RESET)
+
+def boot():
+    clear()
+    badge()
+    print(GREEN + "\nInitializing Secure Operations Node...\n" + RESET)
+    tasks = [
+        "Loading encrypted modules",
+        "Connecting to Langley secure uplink",
+        "Verifying clearance signatures",
+        "Syncing blacksite servers",
+        "Activating cyber division interface"
+    ]
+    for t in tasks:
+        slow("[OK] " + t)
+        time.sleep(0.4)
+    print()
+
+def fake_ddos():
+    slow("Launching Distributed Network Disruption Protocol...")
+    for i in range(0, 101, 10):
+        sys.stdout.write(f"\rPacket Injection: {i}%")
+        sys.stdout.flush()
+        time.sleep(0.2)
+    print()
+    slow(RED + "WARNING: External Firewall Countermeasure Detected." + RESET)
+    slow("Operation aborted.\n")
+
+def fake_cameras():
+    slow("Accessing Global Surveillance Grid...\n")
+    cams = ["Berlin Feed", "Moscow Feed", "Beijing Feed", "Tehran Feed"]
+    for c in cams:
+        slow(f"Connecting to {c} ... SIGNAL LOST")
+        time.sleep(0.5)
+    print()
+
+def fake_cyberteam():
+    slow("Contacting Cyber Operations Team...\n")
+    time.sleep(1)
+    slow("Agent Mason: Online")
+    slow("Agent Harper: Online")
+    slow("Agent Vega: Deploying Counter-Intrusion Tools")
+    slow("Cyber Team Status: ACTIVE\n")
+
+def menu():
+    while True:
+        print(GREEN + BOLD + "\n=== CIA SECURE COMMAND INTERFACE ===" + RESET)
+        print(GREEN + "[1] Launch Network Disruption (DDOS)")
+        print("[2] Access Global Surveillance Cameras")
+        print("[3] Contact Cyber Operations Team")
+        print("[4] Clear Screen")
+        print("[5] Exit\n" + RESET)
+
+        choice = input(GREEN + "cia-secure-node# " + RESET)
+
+        if choice == "1":
+            fake_ddos()
+        elif choice == "2":
+            fake_cameras()
+        elif choice == "3":
+            fake_cyberteam()
+        elif choice == "4":
+            clear()
+            badge()
+        elif choice == "5":
+            slow("Terminating secure session...")
+            break
+        else:
+            print("Invalid selection.\n")
+
+boot()
+menu()
+EOF
+
+python3 cia_terminal.py
